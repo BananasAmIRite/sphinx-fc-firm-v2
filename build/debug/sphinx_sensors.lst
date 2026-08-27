@@ -1,0 +1,91 @@
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccqby2GA.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"sphinx_sensors.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.file 1 "Core/Src/data/sphinx_sensors.c"
+  19              		.section	.text.sphinx_sensors_struct_init,"ax",%progbits
+  20              		.align	1
+  21              		.global	sphinx_sensors_struct_init
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	sphinx_sensors_struct_init:
+  27              	.LFB0:
+   1:Core/Src/data/sphinx_sensors.c **** #include "sphinx_sensors.h"
+   2:Core/Src/data/sphinx_sensors.c **** 
+   3:Core/Src/data/sphinx_sensors.c **** SphinxSensors sphinx_sensors; 
+   4:Core/Src/data/sphinx_sensors.c **** 
+   5:Core/Src/data/sphinx_sensors.c **** void sphinx_sensors_struct_init() {
+  28              		.loc 1 5 35 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+   6:Core/Src/data/sphinx_sensors.c ****     sphinx_sensors.data_rw_lock = osMutexNew(NULL);
+  36              		.loc 1 6 5 view .LVU1
+  37              		.loc 1 6 35 is_stmt 0 view .LVU2
+  38 0002 0020     		movs	r0, #0
+  39 0004 FFF7FEFF 		bl	osMutexNew
+  40              	.LVL0:
+  41              		.loc 1 6 33 discriminator 1 view .LVU3
+  42 0008 014B     		ldr	r3, .L3
+  43 000a 9860     		str	r0, [r3, #8]
+   7:Core/Src/data/sphinx_sensors.c **** }...
+  44              		.loc 1 7 1 view .LVU4
+  45 000c 08BD     		pop	{r3, pc}
+  46              	.L4:
+  47 000e 00BF     		.align	2
+  48              	.L3:
+  49 0010 00000000 		.word	sphinx_sensors
+  50              		.cfi_endproc
+  51              	.LFE0:
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccqby2GA.s 			page 2
+
+
+  53              		.global	sphinx_sensors
+  54              		.section	.bss.sphinx_sensors,"aw",%nobits
+  55              		.align	3
+  58              	sphinx_sensors:
+  59 0000 00000000 		.space	16
+  59      00000000 
+  59      00000000 
+  59      00000000 
+  60              		.text
+  61              	.Letext0:
+  62              		.file 2 "C:/Users/jason/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-to
+  63              		.file 3 "C:/Users/jason/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-to
+  64              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+  65              		.file 5 "Core/Inc/io/sphinx_io.h"
+  66              		.file 6 "Core/Inc/data/sphinx_sensors.h"
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccqby2GA.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 sphinx_sensors.c
+C:\Users\jason\AppData\Local\Temp\ccqby2GA.s:20     .text.sphinx_sensors_struct_init:00000000 $t
+C:\Users\jason\AppData\Local\Temp\ccqby2GA.s:26     .text.sphinx_sensors_struct_init:00000000 sphinx_sensors_struct_init
+C:\Users\jason\AppData\Local\Temp\ccqby2GA.s:49     .text.sphinx_sensors_struct_init:00000010 $d
+C:\Users\jason\AppData\Local\Temp\ccqby2GA.s:58     .bss.sphinx_sensors:00000000 sphinx_sensors
+C:\Users\jason\AppData\Local\Temp\ccqby2GA.s:55     .bss.sphinx_sensors:00000000 $d
+
+UNDEFINED SYMBOLS
+osMutexNew

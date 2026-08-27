@@ -1,0 +1,958 @@
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"bmp5_drv.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.file 1 "Core/Src/bmp5/bmp5_drv.c"
+  19              		.section	.text.bmp5_read,"ax",%progbits
+  20              		.align	1
+  21              		.global	bmp5_read
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	bmp5_read:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 2 "Core/Inc/bmp5/bmp5_stm32.h"
+   1:Core/Inc/bmp5/bmp5_stm32.h **** #ifndef _BMP5_STM32_H_
+   2:Core/Inc/bmp5/bmp5_stm32.h **** #define _BMP5_STM32_H_
+   3:Core/Inc/bmp5/bmp5_stm32.h **** 
+   4:Core/Inc/bmp5/bmp5_stm32.h **** #include "bmp5_defs.h"
+   5:Core/Inc/bmp5/bmp5_stm32.h **** 
+   6:Core/Inc/bmp5/bmp5_stm32.h **** #include "stm32h7xx_hal.h"
+   7:Core/Inc/bmp5/bmp5_stm32.h **** 
+   8:Core/Inc/bmp5/bmp5_stm32.h **** #ifdef FREERTOS_ENABLED
+   9:Core/Inc/bmp5/bmp5_stm32.h **** #include "FreeRTOS.h"
+  10:Core/Inc/bmp5/bmp5_stm32.h **** #include "task.h"
+  11:Core/Inc/bmp5/bmp5_stm32.h **** #include "cmsis_os.h"
+  12:Core/Inc/bmp5/bmp5_stm32.h **** #endif
+  13:Core/Inc/bmp5/bmp5_stm32.h **** 
+  14:Core/Inc/bmp5/bmp5_stm32.h **** I2C_HandleTypeDef *_bmp5_i2c_port;
+  15:Core/Inc/bmp5/bmp5_stm32.h **** 
+  16:Core/Inc/bmp5/bmp5_stm32.h **** void bmp5_assignI2C(I2C_HandleTypeDef *hi2c_device) {
+  17:Core/Inc/bmp5/bmp5_stm32.h ****   _bmp5_i2c_port = hi2c_device;
+  18:Core/Inc/bmp5/bmp5_stm32.h **** }
+  19:Core/Inc/bmp5/bmp5_stm32.h **** 
+  20:Core/Inc/bmp5/bmp5_stm32.h **** BMP5_INTF_RET_TYPE bmp5_read(uint8_t reg_addr, uint8_t *read_data, uint32_t len, void *intf_ptr) {
+  30              		.loc 2 20 98 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 2 20 98 is_stmt 0 view .LVU1
+  35 0000 30B5     		push	{r4, r5, lr}
+  36              		.cfi_def_cfa_offset 12
+  37              		.cfi_offset 4, -12
+  38              		.cfi_offset 5, -8
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 2
+
+
+  39              		.cfi_offset 14, -4
+  40 0002 85B0     		sub	sp, sp, #20
+  41              		.cfi_def_cfa_offset 32
+  42 0004 0D46     		mov	r5, r1
+  43 0006 1446     		mov	r4, r2
+  44 0008 8DF80F00 		strb	r0, [sp, #15]
+  21:Core/Inc/bmp5/bmp5_stm32.h ****   HAL_StatusTypeDef status;
+  45              		.loc 2 21 3 is_stmt 1 view .LVU2
+  22:Core/Inc/bmp5/bmp5_stm32.h ****   
+  23:Core/Inc/bmp5/bmp5_stm32.h ****   status = HAL_I2C_Master_Transmit(_bmp5_i2c_port, BMP5_I2C_ADDR << 1, &reg_addr, 1,
+  46              		.loc 2 23 3 view .LVU3
+  47              		.loc 2 23 12 is_stmt 0 view .LVU4
+  48 000c 6423     		movs	r3, #100
+  49              	.LVL1:
+  50              		.loc 2 23 12 view .LVU5
+  51 000e 0093     		str	r3, [sp]
+  52 0010 0123     		movs	r3, #1
+  53 0012 0DF10F02 		add	r2, sp, #15
+  54              	.LVL2:
+  55              		.loc 2 23 12 view .LVU6
+  56 0016 8E21     		movs	r1, #142
+  57              	.LVL3:
+  58              		.loc 2 23 12 view .LVU7
+  59 0018 0948     		ldr	r0, .L6
+  60              	.LVL4:
+  61              		.loc 2 23 12 view .LVU8
+  62 001a 0068     		ldr	r0, [r0]
+  63 001c FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+  64              	.LVL5:
+  24:Core/Inc/bmp5/bmp5_stm32.h ****                           100);
+  25:Core/Inc/bmp5/bmp5_stm32.h **** 
+  26:Core/Inc/bmp5/bmp5_stm32.h ****     if (status != HAL_OK) return 1;
+  65              		.loc 2 26 5 is_stmt 1 view .LVU9
+  66              		.loc 2 26 8 is_stmt 0 view .LVU10
+  67 0020 10B1     		cbz	r0, .L5
+  68              		.loc 2 26 34 discriminator 1 view .LVU11
+  69 0022 0120     		movs	r0, #1
+  70              	.LVL6:
+  71              	.L2:
+  27:Core/Inc/bmp5/bmp5_stm32.h ****   HAL_I2C_Master_Receive(_bmp5_i2c_port, BMP5_I2C_ADDR << 1, read_data, len,
+  28:Core/Inc/bmp5/bmp5_stm32.h ****                          100);
+  29:Core/Inc/bmp5/bmp5_stm32.h **** 
+  30:Core/Inc/bmp5/bmp5_stm32.h ****     if (status != HAL_OK) return 1;
+  31:Core/Inc/bmp5/bmp5_stm32.h **** 
+  32:Core/Inc/bmp5/bmp5_stm32.h **** 
+  33:Core/Inc/bmp5/bmp5_stm32.h ****     return BMP5_INTF_RET_SUCCESS; 
+  34:Core/Inc/bmp5/bmp5_stm32.h **** }
+  72              		.loc 2 34 1 view .LVU12
+  73 0024 05B0     		add	sp, sp, #20
+  74              		.cfi_remember_state
+  75              		.cfi_def_cfa_offset 12
+  76              		@ sp needed
+  77 0026 30BD     		pop	{r4, r5, pc}
+  78              	.LVL7:
+  79              	.L5:
+  80              		.cfi_restore_state
+  27:Core/Inc/bmp5/bmp5_stm32.h ****   HAL_I2C_Master_Receive(_bmp5_i2c_port, BMP5_I2C_ADDR << 1, read_data, len,
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 3
+
+
+  81              		.loc 2 27 3 is_stmt 1 view .LVU13
+  82 0028 6423     		movs	r3, #100
+  83 002a 0093     		str	r3, [sp]
+  84 002c A3B2     		uxth	r3, r4
+  85 002e 2A46     		mov	r2, r5
+  86 0030 8E21     		movs	r1, #142
+  87 0032 0348     		ldr	r0, .L6
+  88              	.LVL8:
+  27:Core/Inc/bmp5/bmp5_stm32.h ****   HAL_I2C_Master_Receive(_bmp5_i2c_port, BMP5_I2C_ADDR << 1, read_data, len,
+  89              		.loc 2 27 3 is_stmt 0 view .LVU14
+  90 0034 0068     		ldr	r0, [r0]
+  91 0036 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+  92              	.LVL9:
+  30:Core/Inc/bmp5/bmp5_stm32.h **** 
+  93              		.loc 2 30 5 is_stmt 1 view .LVU15
+  33:Core/Inc/bmp5/bmp5_stm32.h **** }
+  94              		.loc 2 33 12 is_stmt 0 view .LVU16
+  95 003a 0020     		movs	r0, #0
+  96 003c F2E7     		b	.L2
+  97              	.L7:
+  98 003e 00BF     		.align	2
+  99              	.L6:
+ 100 0040 00000000 		.word	_bmp5_i2c_port
+ 101              		.cfi_endproc
+ 102              	.LFE145:
+ 104              		.section	.text.bmp5_write,"ax",%progbits
+ 105              		.align	1
+ 106              		.global	bmp5_write
+ 107              		.syntax unified
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	bmp5_write:
+ 112              	.LVL10:
+ 113              	.LFB146:
+  35:Core/Inc/bmp5/bmp5_stm32.h **** 
+  36:Core/Inc/bmp5/bmp5_stm32.h **** 
+  37:Core/Inc/bmp5/bmp5_stm32.h **** BMP5_INTF_RET_TYPE bmp5_write(uint8_t reg_addr, const uint8_t *read_data, uint32_t len, void *intf_
+ 114              		.loc 2 37 105 is_stmt 1 view -0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 1, uses_anonymous_args = 0
+ 118              		.loc 2 37 105 is_stmt 0 view .LVU18
+ 119 0000 80B5     		push	{r7, lr}
+ 120              		.cfi_def_cfa_offset 8
+ 121              		.cfi_offset 7, -8
+ 122              		.cfi_offset 14, -4
+ 123 0002 82B0     		sub	sp, sp, #8
+ 124              		.cfi_def_cfa_offset 16
+ 125 0004 02AF     		add	r7, sp, #8
+ 126              		.cfi_def_cfa 7, 8
+ 127 0006 9646     		mov	lr, r2
+  38:Core/Inc/bmp5/bmp5_stm32.h **** 
+  39:Core/Inc/bmp5/bmp5_stm32.h ****     uint8_t txdata[1 + len];
+ 128              		.loc 2 39 5 is_stmt 1 view .LVU19
+ 129              		.loc 2 39 22 is_stmt 0 view .LVU20
+ 130 0008 531C     		adds	r3, r2, #1
+ 131              	.LVL11:
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 4
+
+
+ 132              		.loc 2 39 13 view .LVU21
+ 133 000a 0832     		adds	r2, r2, #8
+ 134              	.LVL12:
+ 135              		.loc 2 39 13 view .LVU22
+ 136 000c 22F00702 		bic	r2, r2, #7
+ 137 0010 ADEB020D 		sub	sp, sp, r2
+ 138 0014 02AA     		add	r2, sp, #8
+ 139              	.LVL13:
+  40:Core/Inc/bmp5/bmp5_stm32.h ****     txdata[0] = reg_addr; 
+ 140              		.loc 2 40 5 is_stmt 1 view .LVU23
+ 141              		.loc 2 40 15 is_stmt 0 view .LVU24
+ 142 0016 8DF80800 		strb	r0, [sp, #8]
+  41:Core/Inc/bmp5/bmp5_stm32.h ****     for (uint8_t i = 0; i < len; i++) {
+ 143              		.loc 2 41 5 is_stmt 1 view .LVU25
+ 144              	.LBB2:
+ 145              		.loc 2 41 10 view .LVU26
+ 146              	.LVL14:
+ 147              		.loc 2 41 18 is_stmt 0 view .LVU27
+ 148 001a 0020     		movs	r0, #0
+ 149              	.LVL15:
+ 150              		.loc 2 41 5 view .LVU28
+ 151 001c 06E0     		b	.L9
+ 152              	.LVL16:
+ 153              	.L10:
+  42:Core/Inc/bmp5/bmp5_stm32.h ****         txdata[1 + i] = read_data[i];
+ 154              		.loc 2 42 9 is_stmt 1 view .LVU29
+ 155              		.loc 2 42 18 is_stmt 0 view .LVU30
+ 156 001e 00F1010C 		add	ip, r0, #1
+ 157              		.loc 2 42 34 view .LVU31
+ 158 0022 085C     		ldrb	r0, [r1, r0]	@ zero_extendqisi2
+ 159              	.LVL17:
+ 160              		.loc 2 42 23 view .LVU32
+ 161 0024 02F80C00 		strb	r0, [r2, ip]
+  41:Core/Inc/bmp5/bmp5_stm32.h ****     for (uint8_t i = 0; i < len; i++) {
+ 162              		.loc 2 41 35 is_stmt 1 discriminator 3 view .LVU33
+ 163 0028 5FFA8CF0 		uxtb	r0, ip
+ 164              	.LVL18:
+ 165              	.L9:
+  41:Core/Inc/bmp5/bmp5_stm32.h ****     for (uint8_t i = 0; i < len; i++) {
+ 166              		.loc 2 41 27 discriminator 1 view .LVU34
+ 167 002c 7045     		cmp	r0, lr
+ 168 002e F6D3     		bcc	.L10
+ 169              	.LBE2:
+  43:Core/Inc/bmp5/bmp5_stm32.h ****     }
+  44:Core/Inc/bmp5/bmp5_stm32.h **** 
+  45:Core/Inc/bmp5/bmp5_stm32.h ****     uint8_t status = HAL_I2C_Master_Transmit(_bmp5_i2c_port, BMP5_I2C_ADDR << 1,
+ 170              		.loc 2 45 5 view .LVU35
+ 171              		.loc 2 45 22 is_stmt 0 view .LVU36
+ 172 0030 0A21     		movs	r1, #10
+ 173              	.LVL19:
+ 174              		.loc 2 45 22 view .LVU37
+ 175 0032 0091     		str	r1, [sp]
+ 176 0034 9BB2     		uxth	r3, r3
+ 177              	.LVL20:
+ 178              		.loc 2 45 22 view .LVU38
+ 179 0036 8E21     		movs	r1, #142
+ 180 0038 0448     		ldr	r0, .L15
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 5
+
+
+ 181              	.LVL21:
+ 182              		.loc 2 45 22 view .LVU39
+ 183 003a 0068     		ldr	r0, [r0]
+ 184 003c FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 185              	.LVL22:
+  46:Core/Inc/bmp5/bmp5_stm32.h ****                                             txdata, sizeof(txdata), 10);
+  47:Core/Inc/bmp5/bmp5_stm32.h ****     if (status != HAL_OK) {
+ 186              		.loc 2 47 5 is_stmt 1 view .LVU40
+ 187              		.loc 2 47 8 is_stmt 0 view .LVU41
+ 188 0040 08B9     		cbnz	r0, .L14
+ 189              	.LVL23:
+ 190              	.L11:
+  48:Core/Inc/bmp5/bmp5_stm32.h ****         return 1; 
+  49:Core/Inc/bmp5/bmp5_stm32.h ****     }
+  50:Core/Inc/bmp5/bmp5_stm32.h **** 
+  51:Core/Inc/bmp5/bmp5_stm32.h ****     return BMP5_INTF_RET_SUCCESS; 
+  52:Core/Inc/bmp5/bmp5_stm32.h **** }
+ 191              		.loc 2 52 1 view .LVU42
+ 192 0042 BD46     		mov	sp, r7
+ 193              		.cfi_remember_state
+ 194              		.cfi_def_cfa_register 13
+ 195              	.LVL24:
+ 196              		.loc 2 52 1 view .LVU43
+ 197              		@ sp needed
+ 198 0044 80BD     		pop	{r7, pc}
+ 199              	.LVL25:
+ 200              	.L14:
+ 201              		.cfi_restore_state
+  48:Core/Inc/bmp5/bmp5_stm32.h ****         return 1; 
+ 202              		.loc 2 48 16 view .LVU44
+ 203 0046 0120     		movs	r0, #1
+ 204              	.LVL26:
+  48:Core/Inc/bmp5/bmp5_stm32.h ****         return 1; 
+ 205              		.loc 2 48 16 view .LVU45
+ 206 0048 FBE7     		b	.L11
+ 207              	.L16:
+ 208 004a 00BF     		.align	2
+ 209              	.L15:
+ 210 004c 00000000 		.word	_bmp5_i2c_port
+ 211              		.cfi_endproc
+ 212              	.LFE146:
+ 214              		.section	.text.bmp5_delay,"ax",%progbits
+ 215              		.align	1
+ 216              		.global	bmp5_delay
+ 217              		.syntax unified
+ 218              		.thumb
+ 219              		.thumb_func
+ 221              	bmp5_delay:
+ 222              	.LVL27:
+ 223              	.LFB147:
+  53:Core/Inc/bmp5/bmp5_stm32.h **** 
+  54:Core/Inc/bmp5/bmp5_stm32.h **** /*! Delay function pointer */
+  55:Core/Inc/bmp5/bmp5_stm32.h **** void bmp5_delay(uint32_t period, void *intf_ptr) {
+ 224              		.loc 2 55 50 is_stmt 1 view -0
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 6
+
+
+ 228              		.loc 2 55 50 is_stmt 0 view .LVU47
+ 229 0000 08B5     		push	{r3, lr}
+ 230              		.cfi_def_cfa_offset 8
+ 231              		.cfi_offset 3, -8
+ 232              		.cfi_offset 14, -4
+  56:Core/Inc/bmp5/bmp5_stm32.h ****     #ifdef FREERTOS_ENABLED
+  57:Core/Inc/bmp5/bmp5_stm32.h ****     osDelay(period);
+  58:Core/Inc/bmp5/bmp5_stm32.h ****     #else
+  59:Core/Inc/bmp5/bmp5_stm32.h ****     HAL_Delay(period / 1000);
+ 233              		.loc 2 59 5 is_stmt 1 view .LVU48
+ 234              		.loc 2 59 22 is_stmt 0 view .LVU49
+ 235 0002 034B     		ldr	r3, .L19
+ 236 0004 A3FB0030 		umull	r3, r0, r3, r0
+ 237              	.LVL28:
+ 238              		.loc 2 59 5 view .LVU50
+ 239 0008 8009     		lsrs	r0, r0, #6
+ 240 000a FFF7FEFF 		bl	HAL_Delay
+ 241              	.LVL29:
+  60:Core/Inc/bmp5/bmp5_stm32.h ****     #endif
+  61:Core/Inc/bmp5/bmp5_stm32.h **** }
+ 242              		.loc 2 61 1 view .LVU51
+ 243 000e 08BD     		pop	{r3, pc}
+ 244              	.L20:
+ 245              		.align	2
+ 246              	.L19:
+ 247 0010 D34D6210 		.word	274877907
+ 248              		.cfi_endproc
+ 249              	.LFE147:
+ 251              		.section	.text.bmp5_assignI2C,"ax",%progbits
+ 252              		.align	1
+ 253              		.global	bmp5_assignI2C
+ 254              		.syntax unified
+ 255              		.thumb
+ 256              		.thumb_func
+ 258              	bmp5_assignI2C:
+ 259              	.LVL30:
+ 260              	.LFB144:
+  16:Core/Inc/bmp5/bmp5_stm32.h ****   _bmp5_i2c_port = hi2c_device;
+ 261              		.loc 2 16 53 is_stmt 1 view -0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265              		@ link register save eliminated.
+  17:Core/Inc/bmp5/bmp5_stm32.h **** }
+ 266              		.loc 2 17 3 view .LVU53
+  17:Core/Inc/bmp5/bmp5_stm32.h **** }
+ 267              		.loc 2 17 18 is_stmt 0 view .LVU54
+ 268 0000 014B     		ldr	r3, .L22
+ 269 0002 1860     		str	r0, [r3]
+  18:Core/Inc/bmp5/bmp5_stm32.h **** 
+ 270              		.loc 2 18 1 view .LVU55
+ 271 0004 7047     		bx	lr
+ 272              	.L23:
+ 273 0006 00BF     		.align	2
+ 274              	.L22:
+ 275 0008 00000000 		.word	_bmp5_i2c_port
+ 276              		.cfi_endproc
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 7
+
+
+ 277              	.LFE144:
+ 279              		.section	.text.bmp5_read_altitude,"ax",%progbits
+ 280              		.align	1
+ 281              		.global	bmp5_read_altitude
+ 282              		.syntax unified
+ 283              		.thumb
+ 284              		.thumb_func
+ 286              	bmp5_read_altitude:
+ 287              	.LVL31:
+ 288              	.LFB150:
+   1:Core/Src/bmp5/bmp5_drv.c **** #include "bmp5_drv.h"
+   2:Core/Src/bmp5/bmp5_drv.c **** #include "bmp5.h"
+   3:Core/Src/bmp5/bmp5_drv.c **** #include "bmp5_stm32.h"
+   4:Core/Src/bmp5/bmp5_drv.c **** #include "sphinx_io.h"
+   5:Core/Src/bmp5/bmp5_drv.c **** #include <stdint.h>
+   6:Core/Src/bmp5/bmp5_drv.c **** 
+   7:Core/Src/bmp5/bmp5_drv.c **** bmp5_dev bmp5_io; 
+   8:Core/Src/bmp5/bmp5_drv.c **** struct bmp5_osr_odr_press_config bmp5_osr_odr_config; 
+   9:Core/Src/bmp5/bmp5_drv.c **** struct bmp5_sensor_data bmp_sensor_data; 
+  10:Core/Src/bmp5/bmp5_drv.c **** volatile double bmp5_altitude;
+  11:Core/Src/bmp5/bmp5_drv.c **** 
+  12:Core/Src/bmp5/bmp5_drv.c **** 
+  13:Core/Src/bmp5/bmp5_drv.c **** #define BMP5_CAL_PTS 10
+  14:Core/Src/bmp5/bmp5_drv.c **** double bmp5_cal_zero = 0; 
+  15:Core/Src/bmp5/bmp5_drv.c **** 
+  16:Core/Src/bmp5/bmp5_drv.c **** 
+  17:Core/Src/bmp5/bmp5_drv.c **** 
+  18:Core/Src/bmp5/bmp5_drv.c **** int8_t bmp5_calibrate()
+  19:Core/Src/bmp5/bmp5_drv.c **** {
+  20:Core/Src/bmp5/bmp5_drv.c ****     double altitude_sum = 0.0;
+  21:Core/Src/bmp5/bmp5_drv.c **** 
+  22:Core/Src/bmp5/bmp5_drv.c ****     AltimeterReadings readings = {0}; 
+  23:Core/Src/bmp5/bmp5_drv.c **** 
+  24:Core/Src/bmp5/bmp5_drv.c ****     for (uint8_t i = 0; i < BMP5_CAL_PTS; i++) {
+  25:Core/Src/bmp5/bmp5_drv.c **** 
+  26:Core/Src/bmp5/bmp5_drv.c ****         int8_t status = bmp5_read_altitude(&readings);
+  27:Core/Src/bmp5/bmp5_drv.c ****         if (status != BMP5_OK) return status; 
+  28:Core/Src/bmp5/bmp5_drv.c ****         altitude_sum += readings.altitude; 
+  29:Core/Src/bmp5/bmp5_drv.c **** 
+  30:Core/Src/bmp5/bmp5_drv.c ****         HAL_Delay(10);
+  31:Core/Src/bmp5/bmp5_drv.c ****     }
+  32:Core/Src/bmp5/bmp5_drv.c **** 
+  33:Core/Src/bmp5/bmp5_drv.c ****     bmp5_cal_zero = altitude_sum / BMP5_CAL_PTS;
+  34:Core/Src/bmp5/bmp5_drv.c **** 
+  35:Core/Src/bmp5/bmp5_drv.c ****     return 0;
+  36:Core/Src/bmp5/bmp5_drv.c **** }
+  37:Core/Src/bmp5/bmp5_drv.c **** 
+  38:Core/Src/bmp5/bmp5_drv.c **** 
+  39:Core/Src/bmp5/bmp5_drv.c **** int8_t bmp5_config() {
+  40:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.read = bmp5_read; 
+  41:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.write = bmp5_write; 
+  42:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.delay_us = bmp5_delay;
+  43:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.intf = BMP5_I2C_INTF; 
+  44:Core/Src/bmp5/bmp5_drv.c **** 
+  45:Core/Src/bmp5/bmp5_drv.c ****     int8_t status; 
+  46:Core/Src/bmp5/bmp5_drv.c ****     HAL_Delay(100);
+  47:Core/Src/bmp5/bmp5_drv.c ****     status = bmp5_init(&bmp5_io); 
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 8
+
+
+  48:Core/Src/bmp5/bmp5_drv.c **** 
+  49:Core/Src/bmp5/bmp5_drv.c ****     if (status == BMP5_OK) {
+  50:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.odr = BMP5_ODR_100_2_HZ;
+  51:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.press_en = true;  
+  52:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.osr_p = BMP5_OVERSAMPLING_1X; 
+  53:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.osr_t = BMP5_OVERSAMPLING_1X; 
+  54:Core/Src/bmp5/bmp5_drv.c ****         status = bmp5_set_osr_odr_press_config(&bmp5_osr_odr_config, &bmp5_io); 
+  55:Core/Src/bmp5/bmp5_drv.c ****         if (status == BMP5_OK) {
+  56:Core/Src/bmp5/bmp5_drv.c ****             status = bmp5_set_power_mode(BMP5_POWERMODE_NORMAL, &bmp5_io);
+  57:Core/Src/bmp5/bmp5_drv.c ****         }
+  58:Core/Src/bmp5/bmp5_drv.c ****         return bmp5_calibrate(); 
+  59:Core/Src/bmp5/bmp5_drv.c ****     } else {
+  60:Core/Src/bmp5/bmp5_drv.c ****         return status; 
+  61:Core/Src/bmp5/bmp5_drv.c ****     }
+  62:Core/Src/bmp5/bmp5_drv.c **** }
+  63:Core/Src/bmp5/bmp5_drv.c **** 
+  64:Core/Src/bmp5/bmp5_drv.c **** 
+  65:Core/Src/bmp5/bmp5_drv.c **** 
+  66:Core/Src/bmp5/bmp5_drv.c **** int8_t bmp5_read_altitude(AltimeterReadings* readings) {
+ 289              		.loc 1 66 56 is_stmt 1 view -0
+ 290              		.cfi_startproc
+ 291              		@ args = 0, pretend = 0, frame = 0
+ 292              		@ frame_needed = 0, uses_anonymous_args = 0
+ 293              		.loc 1 66 56 is_stmt 0 view .LVU57
+ 294 0000 38B5     		push	{r3, r4, r5, lr}
+ 295              		.cfi_def_cfa_offset 16
+ 296              		.cfi_offset 3, -16
+ 297              		.cfi_offset 4, -12
+ 298              		.cfi_offset 5, -8
+ 299              		.cfi_offset 14, -4
+ 300 0002 0446     		mov	r4, r0
+  67:Core/Src/bmp5/bmp5_drv.c ****     int8_t status = bmp5_get_sensor_data(&bmp_sensor_data, &bmp5_osr_odr_config, &bmp5_io);
+ 301              		.loc 1 67 5 is_stmt 1 view .LVU58
+ 302              		.loc 1 67 21 is_stmt 0 view .LVU59
+ 303 0004 1C4A     		ldr	r2, .L28+24
+ 304 0006 1D49     		ldr	r1, .L28+28
+ 305 0008 1D48     		ldr	r0, .L28+32
+ 306              	.LVL32:
+ 307              		.loc 1 67 21 view .LVU60
+ 308 000a FFF7FEFF 		bl	bmp5_get_sensor_data
+ 309              	.LVL33:
+  68:Core/Src/bmp5/bmp5_drv.c ****     
+  69:Core/Src/bmp5/bmp5_drv.c ****     if (status != 0) return status; 
+ 310              		.loc 1 69 5 is_stmt 1 view .LVU61
+ 311              		.loc 1 69 8 is_stmt 0 view .LVU62
+ 312 000e 0546     		mov	r5, r0
+ 313 0010 08B1     		cbz	r0, .L27
+ 314              	.LVL34:
+ 315              	.L25:
+  70:Core/Src/bmp5/bmp5_drv.c ****     // convert pressure and temperature -> altitude
+  71:Core/Src/bmp5/bmp5_drv.c ****     // this code uses the hypsometric formula
+  72:Core/Src/bmp5/bmp5_drv.c ****     // bmp5_altitude = (
+  73:Core/Src/bmp5/bmp5_drv.c ****     //     (pow(
+  74:Core/Src/bmp5/bmp5_drv.c ****     //         (101325.0 / bmp_sensor_data.pressure),
+  75:Core/Src/bmp5/bmp5_drv.c ****     //         0.1902
+  76:Core/Src/bmp5/bmp5_drv.c ****     //     )-1)
+  77:Core/Src/bmp5/bmp5_drv.c ****     //     * (bmp_sensor_data.temperature + 273.15)
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 9
+
+
+  78:Core/Src/bmp5/bmp5_drv.c ****     // ) / 0.0065;
+  79:Core/Src/bmp5/bmp5_drv.c ****     
+  80:Core/Src/bmp5/bmp5_drv.c ****     // this code uses barometric formula
+  81:Core/Src/bmp5/bmp5_drv.c ****     bmp5_altitude = 44330.0 * (1.0 - pow((bmp_sensor_data.pressure / 101325.0), 0.1902));
+  82:Core/Src/bmp5/bmp5_drv.c **** 
+  83:Core/Src/bmp5/bmp5_drv.c ****     readings->altitude = bmp5_altitude - bmp5_cal_zero; 
+  84:Core/Src/bmp5/bmp5_drv.c **** 
+  85:Core/Src/bmp5/bmp5_drv.c ****     return 0; 
+  86:Core/Src/bmp5/bmp5_drv.c **** }
+ 316              		.loc 1 86 1 view .LVU63
+ 317 0012 2846     		mov	r0, r5
+ 318 0014 38BD     		pop	{r3, r4, r5, pc}
+ 319              	.LVL35:
+ 320              	.L27:
+  81:Core/Src/bmp5/bmp5_drv.c **** 
+ 321              		.loc 1 81 5 is_stmt 1 view .LVU64
+  81:Core/Src/bmp5/bmp5_drv.c **** 
+ 322              		.loc 1 81 58 is_stmt 0 view .LVU65
+ 323 0016 1A4B     		ldr	r3, .L28+32
+ 324 0018 93ED007A 		vldr.32	s14, [r3]
+ 325 001c B7EEC77A 		vcvt.f64.f32	d7, s14
+  81:Core/Src/bmp5/bmp5_drv.c **** 
+ 326              		.loc 1 81 38 view .LVU66
+ 327 0020 9FED0F1B 		vldr.64	d1, .L28
+ 328 0024 9FED100B 		vldr.64	d0, .L28+8
+ 329 0028 87EE000B 		vdiv.f64	d0, d7, d0
+ 330 002c FFF7FEFF 		bl	pow
+ 331              	.LVL36:
+  81:Core/Src/bmp5/bmp5_drv.c **** 
+ 332              		.loc 1 81 36 discriminator 1 view .LVU67
+ 333 0030 B7EE007B 		vmov.f64	d7, #1.0e+0
+ 334 0034 37EE407B 		vsub.f64	d7, d7, d0
+  81:Core/Src/bmp5/bmp5_drv.c **** 
+ 335              		.loc 1 81 29 discriminator 1 view .LVU68
+ 336 0038 9FED0D6B 		vldr.64	d6, .L28+16
+ 337 003c 27EE067B 		vmul.f64	d7, d7, d6
+  81:Core/Src/bmp5/bmp5_drv.c **** 
+ 338              		.loc 1 81 19 discriminator 1 view .LVU69
+ 339 0040 104B     		ldr	r3, .L28+36
+ 340 0042 83ED007B 		vstr.64	d7, [r3]
+  83:Core/Src/bmp5/bmp5_drv.c **** 
+ 341              		.loc 1 83 5 is_stmt 1 view .LVU70
+  83:Core/Src/bmp5/bmp5_drv.c **** 
+ 342              		.loc 1 83 40 is_stmt 0 view .LVU71
+ 343 0046 93ED007B 		vldr.64	d7, [r3]
+ 344 004a 0F4B     		ldr	r3, .L28+40
+ 345 004c 93ED006B 		vldr.64	d6, [r3]
+ 346 0050 37EE467B 		vsub.f64	d7, d7, d6
+  83:Core/Src/bmp5/bmp5_drv.c **** 
+ 347              		.loc 1 83 24 view .LVU72
+ 348 0054 84ED007B 		vstr.64	d7, [r4]
+  85:Core/Src/bmp5/bmp5_drv.c **** }
+ 349              		.loc 1 85 5 is_stmt 1 view .LVU73
+  85:Core/Src/bmp5/bmp5_drv.c **** }
+ 350              		.loc 1 85 12 is_stmt 0 view .LVU74
+ 351 0058 DBE7     		b	.L25
+ 352              	.L29:
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 10
+
+
+ 353 005a 00BFAFF3 		.align	3
+ 353      0080
+ 354              	.L28:
+ 355 0060 637FD93D 		.word	1037664099
+ 356 0064 7958C83F 		.word	1070094457
+ 357 0068 00000000 		.word	0
+ 358 006c D0BCF840 		.word	1090043088
+ 359 0070 00000000 		.word	0
+ 360 0074 40A5E540 		.word	1088791872
+ 361 0078 00000000 		.word	bmp5_io
+ 362 007c 00000000 		.word	bmp5_osr_odr_config
+ 363 0080 00000000 		.word	bmp_sensor_data
+ 364 0084 00000000 		.word	bmp5_altitude
+ 365 0088 00000000 		.word	bmp5_cal_zero
+ 366              		.cfi_endproc
+ 367              	.LFE150:
+ 369              		.section	.text.bmp5_calibrate,"ax",%progbits
+ 370              		.align	1
+ 371              		.global	bmp5_calibrate
+ 372              		.syntax unified
+ 373              		.thumb
+ 374              		.thumb_func
+ 376              	bmp5_calibrate:
+ 377              	.LFB148:
+  19:Core/Src/bmp5/bmp5_drv.c ****     double altitude_sum = 0.0;
+ 378              		.loc 1 19 1 is_stmt 1 view -0
+ 379              		.cfi_startproc
+ 380              		@ args = 0, pretend = 0, frame = 8
+ 381              		@ frame_needed = 0, uses_anonymous_args = 0
+ 382 0000 10B5     		push	{r4, lr}
+ 383              		.cfi_def_cfa_offset 8
+ 384              		.cfi_offset 4, -8
+ 385              		.cfi_offset 14, -4
+ 386 0002 2DED028B 		vpush.64	{d8}
+ 387              		.cfi_def_cfa_offset 16
+ 388              		.cfi_offset 80, -16
+ 389              		.cfi_offset 81, -12
+ 390 0006 82B0     		sub	sp, sp, #8
+ 391              		.cfi_def_cfa_offset 24
+  20:Core/Src/bmp5/bmp5_drv.c **** 
+ 392              		.loc 1 20 5 view .LVU76
+ 393              	.LVL37:
+  22:Core/Src/bmp5/bmp5_drv.c **** 
+ 394              		.loc 1 22 5 view .LVU77
+  22:Core/Src/bmp5/bmp5_drv.c **** 
+ 395              		.loc 1 22 23 is_stmt 0 view .LVU78
+ 396 0008 9FED118B 		vldr.64	d8, .L36
+ 397 000c 8DED008B 		vstr.64	d8, [sp]
+  24:Core/Src/bmp5/bmp5_drv.c **** 
+ 398              		.loc 1 24 5 is_stmt 1 view .LVU79
+ 399              	.LBB3:
+  24:Core/Src/bmp5/bmp5_drv.c **** 
+ 400              		.loc 1 24 10 view .LVU80
+ 401              	.LVL38:
+  24:Core/Src/bmp5/bmp5_drv.c **** 
+ 402              		.loc 1 24 18 is_stmt 0 view .LVU81
+ 403 0010 0024     		movs	r4, #0
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 11
+
+
+ 404              	.LVL39:
+ 405              	.L31:
+  24:Core/Src/bmp5/bmp5_drv.c **** 
+ 406              		.loc 1 24 27 is_stmt 1 discriminator 1 view .LVU82
+ 407 0012 092C     		cmp	r4, #9
+ 408 0014 0ED8     		bhi	.L35
+ 409              	.LBB4:
+  26:Core/Src/bmp5/bmp5_drv.c ****         if (status != BMP5_OK) return status; 
+ 410              		.loc 1 26 9 view .LVU83
+  26:Core/Src/bmp5/bmp5_drv.c ****         if (status != BMP5_OK) return status; 
+ 411              		.loc 1 26 25 is_stmt 0 view .LVU84
+ 412 0016 6846     		mov	r0, sp
+ 413 0018 FFF7FEFF 		bl	bmp5_read_altitude
+ 414              	.LVL40:
+  27:Core/Src/bmp5/bmp5_drv.c ****         altitude_sum += readings.altitude; 
+ 415              		.loc 1 27 9 is_stmt 1 view .LVU85
+  27:Core/Src/bmp5/bmp5_drv.c ****         altitude_sum += readings.altitude; 
+ 416              		.loc 1 27 12 is_stmt 0 view .LVU86
+ 417 001c 0346     		mov	r3, r0
+ 418 001e 88B9     		cbnz	r0, .L32
+  28:Core/Src/bmp5/bmp5_drv.c **** 
+ 419              		.loc 1 28 9 is_stmt 1 view .LVU87
+  28:Core/Src/bmp5/bmp5_drv.c **** 
+ 420              		.loc 1 28 33 is_stmt 0 view .LVU88
+ 421 0020 9DED007B 		vldr.64	d7, [sp]
+  28:Core/Src/bmp5/bmp5_drv.c **** 
+ 422              		.loc 1 28 22 view .LVU89
+ 423 0024 38EE078B 		vadd.f64	d8, d8, d7
+ 424              	.LVL41:
+  30:Core/Src/bmp5/bmp5_drv.c ****     }
+ 425              		.loc 1 30 9 is_stmt 1 view .LVU90
+ 426 0028 0A20     		movs	r0, #10
+ 427              	.LVL42:
+  30:Core/Src/bmp5/bmp5_drv.c ****     }
+ 428              		.loc 1 30 9 is_stmt 0 view .LVU91
+ 429 002a FFF7FEFF 		bl	HAL_Delay
+ 430              	.LVL43:
+  30:Core/Src/bmp5/bmp5_drv.c ****     }
+ 431              		.loc 1 30 9 view .LVU92
+ 432              	.LBE4:
+  24:Core/Src/bmp5/bmp5_drv.c **** 
+ 433              		.loc 1 24 44 is_stmt 1 discriminator 2 view .LVU93
+ 434 002e 0134     		adds	r4, r4, #1
+ 435              	.LVL44:
+  24:Core/Src/bmp5/bmp5_drv.c **** 
+ 436              		.loc 1 24 44 is_stmt 0 discriminator 2 view .LVU94
+ 437 0030 E4B2     		uxtb	r4, r4
+ 438              	.LVL45:
+  24:Core/Src/bmp5/bmp5_drv.c **** 
+ 439              		.loc 1 24 44 discriminator 2 view .LVU95
+ 440 0032 EEE7     		b	.L31
+ 441              	.LVL46:
+ 442              	.L35:
+  24:Core/Src/bmp5/bmp5_drv.c **** 
+ 443              		.loc 1 24 44 discriminator 2 view .LVU96
+ 444              	.LBE3:
+  33:Core/Src/bmp5/bmp5_drv.c **** 
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 12
+
+
+ 445              		.loc 1 33 5 is_stmt 1 view .LVU97
+  33:Core/Src/bmp5/bmp5_drv.c **** 
+ 446              		.loc 1 33 34 is_stmt 0 view .LVU98
+ 447 0034 B2EE046B 		vmov.f64	d6, #1.0e+1
+ 448 0038 88EE067B 		vdiv.f64	d7, d8, d6
+  33:Core/Src/bmp5/bmp5_drv.c **** 
+ 449              		.loc 1 33 19 view .LVU99
+ 450 003c 064B     		ldr	r3, .L36+8
+ 451 003e 83ED007B 		vstr.64	d7, [r3]
+  35:Core/Src/bmp5/bmp5_drv.c **** }
+ 452              		.loc 1 35 5 is_stmt 1 view .LVU100
+  35:Core/Src/bmp5/bmp5_drv.c **** }
+ 453              		.loc 1 35 12 is_stmt 0 view .LVU101
+ 454 0042 0023     		movs	r3, #0
+ 455              	.L32:
+  36:Core/Src/bmp5/bmp5_drv.c **** 
+ 456              		.loc 1 36 1 view .LVU102
+ 457 0044 1846     		mov	r0, r3
+ 458 0046 02B0     		add	sp, sp, #8
+ 459              		.cfi_def_cfa_offset 16
+ 460              		@ sp needed
+ 461 0048 BDEC028B 		vldm	sp!, {d8}
+ 462              		.cfi_restore 80
+ 463              		.cfi_restore 81
+ 464              		.cfi_def_cfa_offset 8
+ 465              	.LVL47:
+  36:Core/Src/bmp5/bmp5_drv.c **** 
+ 466              		.loc 1 36 1 view .LVU103
+ 467 004c 10BD     		pop	{r4, pc}
+ 468              	.LVL48:
+ 469              	.L37:
+  36:Core/Src/bmp5/bmp5_drv.c **** 
+ 470              		.loc 1 36 1 view .LVU104
+ 471 004e 00BF     		.align	3
+ 472              	.L36:
+ 473 0050 00000000 		.word	0
+ 474 0054 00000000 		.word	0
+ 475 0058 00000000 		.word	bmp5_cal_zero
+ 476              		.cfi_endproc
+ 477              	.LFE148:
+ 479              		.section	.text.bmp5_config,"ax",%progbits
+ 480              		.align	1
+ 481              		.global	bmp5_config
+ 482              		.syntax unified
+ 483              		.thumb
+ 484              		.thumb_func
+ 486              	bmp5_config:
+ 487              	.LFB149:
+  39:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.read = bmp5_read; 
+ 488              		.loc 1 39 22 is_stmt 1 view -0
+ 489              		.cfi_startproc
+ 490              		@ args = 0, pretend = 0, frame = 0
+ 491              		@ frame_needed = 0, uses_anonymous_args = 0
+ 492 0000 10B5     		push	{r4, lr}
+ 493              		.cfi_def_cfa_offset 8
+ 494              		.cfi_offset 4, -8
+ 495              		.cfi_offset 14, -4
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 13
+
+
+  40:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.write = bmp5_write; 
+ 496              		.loc 1 40 5 view .LVU106
+  40:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.write = bmp5_write; 
+ 497              		.loc 1 40 18 is_stmt 0 view .LVU107
+ 498 0002 124C     		ldr	r4, .L44
+ 499 0004 124B     		ldr	r3, .L44+4
+ 500 0006 A360     		str	r3, [r4, #8]
+  41:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.delay_us = bmp5_delay;
+ 501              		.loc 1 41 5 is_stmt 1 view .LVU108
+  41:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.delay_us = bmp5_delay;
+ 502              		.loc 1 41 19 is_stmt 0 view .LVU109
+ 503 0008 124B     		ldr	r3, .L44+8
+ 504 000a E360     		str	r3, [r4, #12]
+  42:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.intf = BMP5_I2C_INTF; 
+ 505              		.loc 1 42 5 is_stmt 1 view .LVU110
+  42:Core/Src/bmp5/bmp5_drv.c ****     bmp5_io.intf = BMP5_I2C_INTF; 
+ 506              		.loc 1 42 22 is_stmt 0 view .LVU111
+ 507 000c 124B     		ldr	r3, .L44+12
+ 508 000e 2361     		str	r3, [r4, #16]
+  43:Core/Src/bmp5/bmp5_drv.c **** 
+ 509              		.loc 1 43 5 is_stmt 1 view .LVU112
+  43:Core/Src/bmp5/bmp5_drv.c **** 
+ 510              		.loc 1 43 18 is_stmt 0 view .LVU113
+ 511 0010 0123     		movs	r3, #1
+ 512 0012 6375     		strb	r3, [r4, #21]
+  45:Core/Src/bmp5/bmp5_drv.c ****     HAL_Delay(100);
+ 513              		.loc 1 45 5 is_stmt 1 view .LVU114
+  46:Core/Src/bmp5/bmp5_drv.c ****     status = bmp5_init(&bmp5_io); 
+ 514              		.loc 1 46 5 view .LVU115
+ 515 0014 6420     		movs	r0, #100
+ 516 0016 FFF7FEFF 		bl	HAL_Delay
+ 517              	.LVL49:
+  47:Core/Src/bmp5/bmp5_drv.c **** 
+ 518              		.loc 1 47 5 view .LVU116
+  47:Core/Src/bmp5/bmp5_drv.c **** 
+ 519              		.loc 1 47 14 is_stmt 0 view .LVU117
+ 520 001a 2046     		mov	r0, r4
+ 521 001c FFF7FEFF 		bl	bmp5_init
+ 522              	.LVL50:
+  49:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.odr = BMP5_ODR_100_2_HZ;
+ 523              		.loc 1 49 5 is_stmt 1 view .LVU118
+  49:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.odr = BMP5_ODR_100_2_HZ;
+ 524              		.loc 1 49 8 is_stmt 0 view .LVU119
+ 525 0020 00B1     		cbz	r0, .L42
+ 526              	.LVL51:
+ 527              	.L39:
+  62:Core/Src/bmp5/bmp5_drv.c **** 
+ 528              		.loc 1 62 1 view .LVU120
+ 529 0022 10BD     		pop	{r4, pc}
+ 530              	.LVL52:
+ 531              	.L42:
+  50:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.press_en = true;  
+ 532              		.loc 1 50 9 is_stmt 1 view .LVU121
+  50:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.press_en = true;  
+ 533              		.loc 1 50 33 is_stmt 0 view .LVU122
+ 534 0024 0D48     		ldr	r0, .L44+16
+ 535 0026 0A23     		movs	r3, #10
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 14
+
+
+ 536 0028 C370     		strb	r3, [r0, #3]
+  51:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.osr_p = BMP5_OVERSAMPLING_1X; 
+ 537              		.loc 1 51 9 is_stmt 1 view .LVU123
+  51:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.osr_p = BMP5_OVERSAMPLING_1X; 
+ 538              		.loc 1 51 38 is_stmt 0 view .LVU124
+ 539 002a 0123     		movs	r3, #1
+ 540              	.LVL53:
+  51:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.osr_p = BMP5_OVERSAMPLING_1X; 
+ 541              		.loc 1 51 38 view .LVU125
+ 542 002c 8370     		strb	r3, [r0, #2]
+  52:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.osr_t = BMP5_OVERSAMPLING_1X; 
+ 543              		.loc 1 52 9 is_stmt 1 view .LVU126
+  52:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.osr_t = BMP5_OVERSAMPLING_1X; 
+ 544              		.loc 1 52 35 is_stmt 0 view .LVU127
+ 545 002e 0023     		movs	r3, #0
+ 546              	.LVL54:
+  52:Core/Src/bmp5/bmp5_drv.c ****         bmp5_osr_odr_config.osr_t = BMP5_OVERSAMPLING_1X; 
+ 547              		.loc 1 52 35 view .LVU128
+ 548 0030 4370     		strb	r3, [r0, #1]
+  53:Core/Src/bmp5/bmp5_drv.c ****         status = bmp5_set_osr_odr_press_config(&bmp5_osr_odr_config, &bmp5_io); 
+ 549              		.loc 1 53 9 is_stmt 1 view .LVU129
+  53:Core/Src/bmp5/bmp5_drv.c ****         status = bmp5_set_osr_odr_press_config(&bmp5_osr_odr_config, &bmp5_io); 
+ 550              		.loc 1 53 35 is_stmt 0 view .LVU130
+ 551 0032 0370     		strb	r3, [r0]
+  54:Core/Src/bmp5/bmp5_drv.c ****         if (status == BMP5_OK) {
+ 552              		.loc 1 54 9 is_stmt 1 view .LVU131
+  54:Core/Src/bmp5/bmp5_drv.c ****         if (status == BMP5_OK) {
+ 553              		.loc 1 54 18 is_stmt 0 view .LVU132
+ 554 0034 2146     		mov	r1, r4
+ 555 0036 FFF7FEFF 		bl	bmp5_set_osr_odr_press_config
+ 556              	.LVL55:
+  55:Core/Src/bmp5/bmp5_drv.c ****             status = bmp5_set_power_mode(BMP5_POWERMODE_NORMAL, &bmp5_io);
+ 557              		.loc 1 55 9 is_stmt 1 view .LVU133
+  55:Core/Src/bmp5/bmp5_drv.c ****             status = bmp5_set_power_mode(BMP5_POWERMODE_NORMAL, &bmp5_io);
+ 558              		.loc 1 55 12 is_stmt 0 view .LVU134
+ 559 003a 10B1     		cbz	r0, .L43
+ 560              	.LVL56:
+ 561              	.L40:
+  58:Core/Src/bmp5/bmp5_drv.c ****     } else {
+ 562              		.loc 1 58 9 is_stmt 1 view .LVU135
+  58:Core/Src/bmp5/bmp5_drv.c ****     } else {
+ 563              		.loc 1 58 16 is_stmt 0 view .LVU136
+ 564 003c FFF7FEFF 		bl	bmp5_calibrate
+ 565              	.LVL57:
+ 566 0040 EFE7     		b	.L39
+ 567              	.LVL58:
+ 568              	.L43:
+  56:Core/Src/bmp5/bmp5_drv.c ****         }
+ 569              		.loc 1 56 13 is_stmt 1 view .LVU137
+  56:Core/Src/bmp5/bmp5_drv.c ****         }
+ 570              		.loc 1 56 22 is_stmt 0 view .LVU138
+ 571 0042 2146     		mov	r1, r4
+ 572 0044 0120     		movs	r0, #1
+ 573              	.LVL59:
+  56:Core/Src/bmp5/bmp5_drv.c ****         }
+ 574              		.loc 1 56 22 view .LVU139
+ 575 0046 FFF7FEFF 		bl	bmp5_set_power_mode
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 15
+
+
+ 576              	.LVL60:
+  56:Core/Src/bmp5/bmp5_drv.c ****         }
+ 577              		.loc 1 56 22 view .LVU140
+ 578 004a F7E7     		b	.L40
+ 579              	.L45:
+ 580              		.align	2
+ 581              	.L44:
+ 582 004c 00000000 		.word	bmp5_io
+ 583 0050 00000000 		.word	bmp5_read
+ 584 0054 00000000 		.word	bmp5_write
+ 585 0058 00000000 		.word	bmp5_delay
+ 586 005c 00000000 		.word	bmp5_osr_odr_config
+ 587              		.cfi_endproc
+ 588              	.LFE149:
+ 590              		.global	bmp5_cal_zero
+ 591              		.section	.bss.bmp5_cal_zero,"aw",%nobits
+ 592              		.align	3
+ 595              	bmp5_cal_zero:
+ 596 0000 00000000 		.space	8
+ 596      00000000 
+ 597              		.global	bmp5_altitude
+ 598              		.section	.bss.bmp5_altitude,"aw",%nobits
+ 599              		.align	3
+ 602              	bmp5_altitude:
+ 603 0000 00000000 		.space	8
+ 603      00000000 
+ 604              		.global	bmp_sensor_data
+ 605              		.section	.bss.bmp_sensor_data,"aw",%nobits
+ 606              		.align	2
+ 609              	bmp_sensor_data:
+ 610 0000 00000000 		.space	8
+ 610      00000000 
+ 611              		.global	bmp5_osr_odr_config
+ 612              		.section	.bss.bmp5_osr_odr_config,"aw",%nobits
+ 613              		.align	2
+ 616              	bmp5_osr_odr_config:
+ 617 0000 00000000 		.space	4
+ 618              		.global	bmp5_io
+ 619              		.section	.bss.bmp5_io,"aw",%nobits
+ 620              		.align	2
+ 623              	bmp5_io:
+ 624 0000 00000000 		.space	24
+ 624      00000000 
+ 624      00000000 
+ 624      00000000 
+ 624      00000000 
+ 625              		.global	_bmp5_i2c_port
+ 626              		.section	.bss._bmp5_i2c_port,"aw",%nobits
+ 627              		.align	2
+ 630              	_bmp5_i2c_port:
+ 631 0000 00000000 		.space	4
+ 632              		.text
+ 633              	.Letext0:
+ 634              		.file 3 "C:/Users/jason/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-to
+ 635              		.file 4 "C:/Users/jason/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-to
+ 636              		.file 5 "Core/Inc/io/sphinx_io.h"
+ 637              		.file 6 "Core/Inc/bmp5/bmp5_defs.h"
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 16
+
+
+ 638              		.file 7 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h"
+ 639              		.file 8 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 640              		.file 9 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
+ 641              		.file 10 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h"
+ 642              		.file 11 "Core/Inc/bmp5/bmp5.h"
+ 643              		.file 12 "C:/Users/jason/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-t
+ 644              		.file 13 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ARM GAS  C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 bmp5_drv.c
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:20     .text.bmp5_read:00000000 $t
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:26     .text.bmp5_read:00000000 bmp5_read
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:100    .text.bmp5_read:00000040 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:630    .bss._bmp5_i2c_port:00000000 _bmp5_i2c_port
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:105    .text.bmp5_write:00000000 $t
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:111    .text.bmp5_write:00000000 bmp5_write
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:210    .text.bmp5_write:0000004c $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:215    .text.bmp5_delay:00000000 $t
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:221    .text.bmp5_delay:00000000 bmp5_delay
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:247    .text.bmp5_delay:00000010 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:252    .text.bmp5_assignI2C:00000000 $t
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:258    .text.bmp5_assignI2C:00000000 bmp5_assignI2C
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:275    .text.bmp5_assignI2C:00000008 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:280    .text.bmp5_read_altitude:00000000 $t
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:286    .text.bmp5_read_altitude:00000000 bmp5_read_altitude
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:355    .text.bmp5_read_altitude:00000060 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:623    .bss.bmp5_io:00000000 bmp5_io
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:616    .bss.bmp5_osr_odr_config:00000000 bmp5_osr_odr_config
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:609    .bss.bmp_sensor_data:00000000 bmp_sensor_data
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:602    .bss.bmp5_altitude:00000000 bmp5_altitude
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:595    .bss.bmp5_cal_zero:00000000 bmp5_cal_zero
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:370    .text.bmp5_calibrate:00000000 $t
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:376    .text.bmp5_calibrate:00000000 bmp5_calibrate
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:473    .text.bmp5_calibrate:00000050 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:480    .text.bmp5_config:00000000 $t
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:486    .text.bmp5_config:00000000 bmp5_config
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:582    .text.bmp5_config:0000004c $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:592    .bss.bmp5_cal_zero:00000000 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:599    .bss.bmp5_altitude:00000000 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:606    .bss.bmp_sensor_data:00000000 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:613    .bss.bmp5_osr_odr_config:00000000 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:620    .bss.bmp5_io:00000000 $d
+C:\Users\jason\AppData\Local\Temp\ccJnpeZW.s:627    .bss._bmp5_i2c_port:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Master_Transmit
+HAL_I2C_Master_Receive
+HAL_Delay
+bmp5_get_sensor_data
+pow
+bmp5_init
+bmp5_set_osr_odr_press_config
+bmp5_set_power_mode

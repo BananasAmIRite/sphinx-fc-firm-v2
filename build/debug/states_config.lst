@@ -1,0 +1,68 @@
+ARM GAS  C:\Users\jason\AppData\Local\Temp\cc7gGx5k.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"states_config.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.file 1 "Core/Src/states_config.c"
+  19              		.global	flight_state
+  20              		.section	.data.flight_state,"aw"
+  21              		.align	2
+  24              	flight_state:
+  25 0000 00000000 		.word	alt_read_algorithm
+  26 0004 00000000 		.space	60
+  26      00000000 
+  26      00000000 
+  26      00000000 
+  26      00000000 
+  27 0040 01000000 		.word	1
+  28 0044 FF00     		.short	255
+  29 0046 0000     		.space	2
+  30              		.global	idle_state
+  31              		.section	.data.idle_state,"aw"
+  32              		.align	2
+  35              	idle_state:
+  36 0000 00000000 		.word	alt_read_algorithm
+  37 0004 00000000 		.space	60
+  37      00000000 
+  37      00000000 
+  37      00000000 
+  37      00000000 
+  38 0040 01000000 		.word	1
+  39 0044 FF00     		.short	255
+  40 0046 0000     		.space	2
+  41              		.text
+  42              	.Letext0:
+  43              		.file 2 "C:/Users/jason/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-to
+  44              		.file 3 "C:/Users/jason/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-to
+  45              		.file 4 "Algorithms/Inc/algorithm.h"
+  46              		.file 5 "C:/Users/jason/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-to
+  47              		.file 6 "Algorithms/Inc/state.h"
+  48              		.file 7 "Core/Inc/states_config.h"
+  49              		.file 8 "Core/Inc/algorithms/alg_altimeter_read.h"
+ARM GAS  C:\Users\jason\AppData\Local\Temp\cc7gGx5k.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 states_config.c
+C:\Users\jason\AppData\Local\Temp\cc7gGx5k.s:24     .data.flight_state:00000000 flight_state
+C:\Users\jason\AppData\Local\Temp\cc7gGx5k.s:21     .data.flight_state:00000000 $d
+C:\Users\jason\AppData\Local\Temp\cc7gGx5k.s:35     .data.idle_state:00000000 idle_state
+C:\Users\jason\AppData\Local\Temp\cc7gGx5k.s:32     .data.idle_state:00000000 $d
+
+UNDEFINED SYMBOLS
+alt_read_algorithm
