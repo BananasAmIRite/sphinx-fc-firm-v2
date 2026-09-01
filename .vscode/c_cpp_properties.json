@@ -3,13 +3,7 @@
         {
             "name": "STM32",
             "includePath": [
-                "/",
-                "Algorithms/Inc",
                 "Core/Inc",
-                "Core/Inc/algorithms",
-                "Core/Inc/bmp5",
-                "Core/Inc/data",
-                "Core/Inc/io",
                 "Drivers/CMSIS/Device/ST/STM32H7xx/Include",
                 "Drivers/CMSIS/Include",
                 "Drivers/STM32H7xx_HAL_Driver/Inc",
@@ -20,13 +14,22 @@
                 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
                 "Middlewares/Third_Party/FreeRTOS/Source/include",
                 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F",
-                "Core/Inc/vl53l1x"
+                "Shared/Algorithm",
+                "Shared/State",
+                "Shared/IO",
+                "Platform/STM",
+                "Platform/STM/State",
+                "Platform/STM/vl53l1x",
+                "Platform/STM/bmp5",
+                "App/Algorithm/altimeter",
+                "App/data",
+                "App/config"
             ],
             "defines": [
+                "FREERTOS_ENABLED",
                 "STM32H750xx",
                 "USE_HAL_DRIVER",
-                "USE_PWR_LDO_SUPPLY",
-                "FREERTOS_ENABLED"
+                "USE_PWR_LDO_SUPPLY"
             ],
             "compilerPath": "c:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\bmd.stm32-for-vscode\\@xpack-dev-tools\\arm-none-eabi-gcc\\15.2.1-1.1.1\\.content\\bin\\arm-none-eabi-gcc.EXE"
         }
