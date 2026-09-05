@@ -11,8 +11,8 @@ void stm_main(void) {
 
     // context for STM state machine operation with RTOS
     StmStateMachine stm_sm;
-    stm_sm.runtime = &stm_runtime; 
     stm_state_machine_init(&stm_sm);
+    stm_sm.runtime = &stm_runtime; 
     
     // configure IO layer to be fed into runtime
     #ifdef HIL_SIM
