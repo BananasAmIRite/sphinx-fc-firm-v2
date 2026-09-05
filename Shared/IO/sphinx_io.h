@@ -18,6 +18,6 @@ typedef struct {
     
 } SphinxIO; 
 
-void sphinx_io_init(); 
+void sphinx_io_init(SphinxIO *sphinx_io_inst); 
 
 #endif
