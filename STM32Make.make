@@ -91,6 +91,10 @@ Core/Src/stm32h7xx_it.c \
 Core/Src/syscalls.c \
 Core/Src/sysmem.c \
 Core/Src/system_stm32h7xx.c \
+Core/Src/vl53l1x/vl53l1x.c \
+Core/Src/vl53l1x/vl53l1x_drv.c \
+Core/Src/vl53l1x/vl53l1x_stm32.c \
+Core/Src/vl53l1x/vl53l1x_tof.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c \
@@ -215,6 +219,7 @@ AS_DEFS =
 
 # C defines
 C_DEFS =  \
+-DFREERTOS_ENABLED \
 -DSTM32H750xx \
 -DUSE_HAL_DRIVER \
 -DUSE_PWR_LDO_SUPPLY
@@ -222,6 +227,7 @@ C_DEFS =  \
 
 # CXX defines
 CXX_DEFS =  \
+-DFREERTOS_ENABLED \
 -DSTM32H750xx \
 -DUSE_HAL_DRIVER \
 -DUSE_PWR_LDO_SUPPLY
@@ -232,13 +238,13 @@ AS_INCLUDES = \
 
 # C includes
 C_INCLUDES =  \
--I/ \
 -IAlgorithms/Inc \
 -ICore/Inc \
 -ICore/Inc/algorithms \
 -ICore/Inc/bmp5 \
 -ICore/Inc/data \
 -ICore/Inc/io \
+-ICore/Inc/vl53l1x \
 -IDrivers/CMSIS/Device/ST/STM32H7xx/Include \
 -IDrivers/CMSIS/Include \
 -IDrivers/STM32H7xx_HAL_Driver/Inc \
