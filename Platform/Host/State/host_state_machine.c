@@ -1,7 +1,8 @@
 #include "host_state_machine.h"
 
 void loop_host_state_machine(HostStateMachine* context) {
-    // do the loop step for all the states (thread 0 since we don't have threads enabled here)
+    // do the loop step for the current states (thread 0 since we don't have threads enabled here)
+    // runs all the algs basically
     state_loop(context->runtime, 0, context->cur_state); 
 
     if (context->next_state != NULL) {
