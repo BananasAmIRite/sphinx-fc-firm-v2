@@ -21,11 +21,13 @@ ifeq ($(findstring Windows_NT,$(OS)),Windows_NT)
     RM      := del /Q /S
     MKDIR   := mkdir
     FIX_SL  = $(subst /,\,$1)
+    PLATFORM_DEF := -DWIN
 else
     TARGET  := $(NAME)
     RM      := rm -rf
     MKDIR   := mkdir -p
     FIX_SL  = $1
+    PLATFORM_DEF := -DUNIX
 endif
 
 ######################################
@@ -76,7 +78,8 @@ SZ = size
 #######################################
 # Macros for host gcc
 C_DEFS = \
--DSIM
+$(PLATFORM_DEF) \
+-DSIM \
 
 # C includes (Targeting Platform/Host instead of Platform/STM)
 C_INCLUDES = \
