@@ -25,7 +25,8 @@
                 "Platform/Host/State",
                 "App/Algorithm/altimeter",
                 "App/data",
-                "App/config"
+                "App/config",
+                "EmbeddedLapack/"
             ],
             "defines": [
                 "FREERTOS_ENABLED",

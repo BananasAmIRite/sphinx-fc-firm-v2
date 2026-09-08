@@ -43,8 +43,8 @@ int main() {
     host_state_machine_request_transition(&host_sm, &idle_state); 
 
     // TODO: instead of ticking independently using a while loop, you could also loop once every "tick" from an external program if you'd like
-    // while (1) {
-    //     loop_host_state_machine(&host_sm); 
-    // }
+    while (1) {
+        loop_host_state_machine(&host_sm); 
+    }
 
 }

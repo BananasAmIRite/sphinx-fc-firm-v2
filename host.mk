@@ -42,7 +42,7 @@ OPT = -Og
 # paths
 ######################################
 # Build path
-BUILD_DIR = build
+BUILD_DIR = build-host
 
 ######################################
 # source
@@ -59,6 +59,10 @@ C_SOURCES += $(wildcard App/Algorithm/*.c)
 # Platform/Host logic
 C_SOURCES += $(wildcard Platform/Host/**/*.c)
 C_SOURCES += $(wildcard Platform/Host/*.c)
+
+# EmbeddedLapack
+C_SOURCES += $(wildcard EmbeddedLapack/**/*.c)
+C_SOURCES += $(wildcard EmbeddedLapack/**/**/*.c)
 
 print-%:
 	@echo '$*=$($*)'
@@ -90,7 +94,9 @@ C_INCLUDES = \
 -IApp/config \
 -IApp/data \
 -IPlatform/Host \
--IPlatform/Host/State
+-IPlatform/Host/State \
+-IEmbeddedLapack \
+-Im
 
 # Compile gcc flags
 CFLAGS += $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
@@ -101,6 +107,9 @@ endif
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
+
+# extra flags
+CFLAGS += -Wno-unused-function -Wno-address
 
 #######################################
 # LDFLAGS

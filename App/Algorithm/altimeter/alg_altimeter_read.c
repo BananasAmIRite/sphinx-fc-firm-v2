@@ -2,6 +2,8 @@
 #include "sphinx_io.h"
 #include <platform_runtime.h>
 #include "sphinx_data.h"
+#include "LinearAlgebra/declareFunctions.h"
+#include <time.h>
 
 
 #ifdef FREERTOS_ENABLED
@@ -25,6 +27,7 @@ void alt_read_loop(Algorithm *self, PlatformRuntime *runtime) {
     //     // osMutexAcquire(sphinx_sensors.data_rw_lock, pdMS_TO_TICKS(10)); 
     // #endif
     // TODO: may need to separate if they have separate timings
+
     runtime->io->altimeter_read(sphinx_data.raw_alti_readings); 
     runtime->io->altimeter_tof_read(sphinx_data.raw_alti_readings); 
     

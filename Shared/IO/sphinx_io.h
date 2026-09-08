@@ -15,6 +15,10 @@ typedef struct {
 
     int8_t (*altimeter_tof_init)(); 
     int8_t (*altimeter_tof_read)(AltimeterReadings* readings); 
+
+    int8_t (*sd_init)(); 
+    int8_t (*sd_write)(char* str); 
+
     
 } SphinxIO; 
 

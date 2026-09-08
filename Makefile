@@ -98,6 +98,8 @@ C_SOURCES += $(wildcard App/Algorithm/**/*.c)
 C_SOURCES += $(wildcard App/Algorithm/*.c)
 C_SOURCES += $(wildcard Platform/STM/**/*.c)
 C_SOURCES += $(wildcard Platform/STM/*.c)
+C_SOURCES += $(wildcard EmbeddedLapack/**/*.c)
+C_SOURCES += $(wildcard EmbeddedLapack/**/**/*.c)
 
 print-%:
 	@echo '$*=$($*)'
@@ -185,7 +187,11 @@ C_INCLUDES =  \
 -IShared/State \
 -IApp/Algorithm/altimeter \
 -IApp/config \
--IApp/data
+-IApp/data \
+-IEmbeddedLapack \
+-Im
+# -IEmbeddedLapack/Lapack/Include \
+# -IEmbeddedLapack/qpOASES/Header \
 
 
 # compile gcc flags
@@ -200,6 +206,7 @@ endif
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
+CFLAGS += -Wno-unused-function -Wno-address
 
 
 #######################################
